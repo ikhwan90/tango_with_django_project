@@ -35,7 +35,7 @@ def populate():
 		"Other Frameworks": {"pages": other_pages} }
 
 	for cat, cat_data in cats.items():
-		c = add_cat ( cat, views, likes )
+		c = add_cat( cat, views, likes )
 		for p in cat_data["pages"]:
 			add_page(c, p["title"], p["url"])
 
@@ -52,7 +52,7 @@ def add_page(cat, title, url, views=0):
 	return p
 
 def add_cat(name, views=0, likes=0):
-	c = Category.objects.get_or_create ( name=name)[0]
+	c = Category.objects.get_or_create (name=name)[0]
 	c.views = views
 	c.likes = likes
 	c.save ()
