@@ -51,22 +51,14 @@ def add_page(cat, title, url, views=0):
 	p.save ()
 	return p
 
-def add_cat(name, views, likes):
+def add_cat(name, views=0, likes=0):
 	c = Category.objects.get_or_create ( name=name)[0]
 	c.views = views
 	c.likes = likes
 	c.save ()
 	return c
 
-#def add_cat(views):
-#	c = Category.objects.get_or_create (  )[0]
-#	c.save ()
-#	return c
 
-#def add_cat(likes):
-#	c = Category.objects.get_or_create (  )[0]
-#	c.save ()
-#	return c
 
 if __name__ == '__main__':
 	print("Starting Rango population script...")
