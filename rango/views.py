@@ -15,9 +15,11 @@ def index(request):
     return HttpResponse ( 'Rango says hey there partner! <br/> <a href=' / rango / about / '>About</a>.')
 
 def about(request):
-    context_dict = {'boldmessage': "This tutorial has been put together by Muhammad Ikhwani"}
-    return render ( request, 'rango/about.html', context=context_dict )
-    return HttpResponse('Rango says here is the about page. <a href="/rango/">Index</a>.' )
+    # prints out whether the method is a GET or a POST
+    print(request.method)
+    # prints out the user name, if no one is logged in it prints `AnonymousUser`
+    print(request.user)
+    return render(request, 'rango/about.html', {})
 
 def show_category(request, category_name_slug):
     context_dict = {}
@@ -51,6 +53,7 @@ def add_page(request, category_name_slug):
         category = Category.objects.get ( slug=category_name_slug )
     except Category.DoesNotExist:
         category = None
+
     form = PageForm ()
     if request.method == 'POST':
         form = PageForm ( request.POST )
@@ -67,3 +70,6 @@ def add_page(request, category_name_slug):
         context_dict = {'form': form, 'category': category}
     return render ( request, 'rango/add_page.html', context_dict )
 
+def get_category_list(cat=None):
+    return {'cats': Category.objects.all (),
+        'act_cat': cat}
